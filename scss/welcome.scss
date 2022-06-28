@@ -1,0 +1,199 @@
+// import scss files
+@import "general";
+
+// ==== WELCOME PAGE STYLES =====
+
+// ------ LOADING SPINNER -------
+
+.spinner {
+    @include box($width: calc(100vw - 50px), $height: calc(100vh - 50px), $padding: 25px, $backcolor: $color_bg, $radius: 0px);
+
+    // positioning
+    top: 0px;
+    left: 0px;
+    position: absolute;
+    z-index: 1;
+    
+    // animation mixin
+    @include fade;
+
+    > div:first-of-type {
+        @include box($width: $spinnerh, $height: $spinnerh, $padding: 10px, $backcolor: $color_1, $radius: $radius_medium);
+        // content layout management
+        @include flex;
+        // font
+        font-family: 'Roboto', sans-serif;
+        font-size: $spinnerh;
+        font-weight: 500;
+        color: $color_3;
+        
+        // animation mixin
+        @include spin;
+    }
+
+    // override font for logo
+    span.strong:first-of-type{
+        @include span($size: 50px, $weight: 500, $font: 'Shrikhand', $typo: cursive);
+        // override
+        width: 300px;
+        text-align: center;
+        // positioning
+        top: calc((100vh - 60px) / 2);
+        left: calc((100vw - 300px) / 2);
+        position: absolute;
+        z-index: 2;
+    
+        // animation mixin
+        @include blink;
+    }
+}
+
+// --------- 'LOCATION' ---------
+
+.box--location {
+    // box mixin overrides
+    height: 60px;
+    padding: 0;
+    flex-direction: row;
+    // background
+    background-image: linear-gradient(to bottom, #c9c9c9, #e7e7e7 10%);
+}
+
+// ---------- 'WELCOME' ---------
+
+.box--welcome {
+    // box mixin overrides
+    background-color: $color_bg;
+
+    // text
+    span {
+        margin-bottom: 15px;
+        text-align: center;
+    }
+
+    // description
+    span.weak--large {
+        font-size: 15.5px;
+    }
+}
+
+// ----------- TITLES -----------
+
+.box__title {
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+// ----------- 'HOWTO' ----------
+
+.box--howto {
+    // tutorial
+    .thumbnail--tutorial {
+
+        // rounded box
+        @include box($width: calc(100% - 67.5px), $padding: 20px, $backcolor: $color_bg);
+        margin-bottom: 22.5px;
+        // content layout management
+        @include flex($direction: row, $justify: flex-start);
+
+        // numbering
+        &__number {
+            // round box
+            @include box($width: 22.5px, $height: 22.5px, $padding: initial, $backcolor: $color_1, $radius: 100%);
+            // overlay effect
+            margin-left: -32.5px;
+            // content layout management
+            @include flex($justify: center);
+            font-family: 'Roboto', sans-serif;
+            color: white;
+        }
+
+        // other (use a variable to evaluate ampersand in the selector)
+        > *:not(#{&}__number) {
+            margin-left: 20px;
+        }
+        
+        // font override
+        > * {
+            font-size: 13.75px;
+        }
+
+        // hover
+        &:hover {
+            background-color: $color_1_xlight;
+            // icon
+            i {
+                color: $color_1;
+            }
+        }
+
+    }
+}
+
+// -------- 'RESTAURANTS' -------
+
+.box--restaurants {
+    // box mixin overrides
+    background-color: $color_bg;
+    align-items: flex-start;
+
+    a {
+        // thumbnail wrapper
+        width: 100%;
+    }
+
+    .thumbnail--restaurant {
+        // thumbnail class overrides
+        border-radius: $radius_large;
+        height: 200px;
+        // mandatory for top border radius
+        overflow: hidden;
+
+        // image
+        &__image {
+            height: 70%;
+            box-sizing: $box_sizing;
+
+            img {
+                // adjust images to container
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        // title + description
+        &__title {
+            // rounded box
+            @include box($height: 30%, $padding: 10px);
+            // content layout management
+            @include flex($align: flex-start, $justify: space-evenly);
+            box-sizing: $box_sizing;
+
+            // remove vertical margins
+            > * {
+                margin: 0; 
+            }
+        }
+
+        // overlay
+        &__overlay {
+            // rounded box
+            @include box($width: 100%, $height: 200px, $padding: 10px, $backcolor: initial);
+            // content layout management
+            @include flex($align: flex-end, $justify: space-between);
+            // overlay effect
+            margin-top: -200px;
+            box-sizing: $box_sizing;
+
+            // 'nouveau'
+            span.average__green {
+                // rounded box
+                @include box($padding: 5px 10px, $backcolor: $color_3, $radius: $radius_small);
+                margin: 5px;
+                color: #267e5c;
+            }
+        }
+    
+    }
+}

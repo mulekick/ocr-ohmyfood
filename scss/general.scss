@@ -1,0 +1,171 @@
+@charset "utf-8";
+// import Roboto and Shrikhand from google font
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
+// import scss files
+@import "variables";
+@import "mixins";
+
+// ======= GENERAL STYLES =======
+
+.hide {
+    visibility: hidden;
+}
+
+a {
+    // disable underline and color on all links
+    text-decoration: none;
+    color: black;
+}
+
+// ------------ BOX -------------
+
+.box {
+    // square box by default
+    @include box($radius: 0px);
+    // column layout by default
+    @include flex;
+}
+
+// ---------- BUTTONS -----------
+
+a.button {
+    // rounded box
+    @include box($padding: 15px 25px, $radius: 35px);
+    min-width: 150px;
+    margin: 10px 0;
+    background-image: linear-gradient(165deg, $color_2, $color_1);
+
+    font-family: 'Roboto', sans-serif;
+    font-size: 12.5px;
+    font-weight: 500;
+
+    color: white;
+    text-align: center;
+    // shadowed
+    @include shadow;
+
+    // hover
+    &:hover {
+        background-image: linear-gradient(165deg, $color_2_light, $color_1_light);
+        // shadowed hover
+        @include shadow(5px, 3px);
+    }
+}
+
+// -------- THUMBNAILS ----------
+
+.thumbnail {
+    // rounded box
+    @include box($padding: unset);    
+    margin-bottom: 17.5px;
+    // content layout management
+    @include flex($align: unset);
+    // shadowed
+    @include shadow;
+    // cursor (link managed through event)
+    cursor: pointer;
+}
+
+// ----------- SPANS ------------
+
+span.strong, h1 {
+    @include span($size: 22.5px, $weight: 700);
+}
+
+span.average, h3 {
+    @include span;
+}
+
+span.average__small {
+    font-size: 12.5px;
+}
+
+span.weak, h4 {
+    @include span($size: 12.5px, $weight: 300);
+}
+
+// ------------ PAGE ------------
+
+body {
+    width: 100%;
+    // stop viewport shrinking
+    min-width: 268px;
+    // remove default margin
+    margin: 0px;
+    // set default body dimensions (no border, no padding)
+    box-sizing: $box_sizing;
+}
+
+header {
+    height: 75px;
+    // content layout management
+    @include flex;
+
+    // logo
+    > img {
+        width: 200px;
+        margin-top: 10px;
+    }
+}
+
+div.thumbnail--restaurant__like {        
+    // rounded box
+    @include box($padding: 0 10px 10px 0, $radius: 0);
+    // content layout management
+    @include flex($direction: row, $justify: initial);
+
+    // 'like'
+    i {
+        font-size: 24px;
+
+        &.fa-regular {
+            background-color: white;
+            // manage transition
+            transition-property: opacity, background-color;
+            transition-duration: 0.5s;
+            transition-delay: 0s;
+        }
+    
+        &.fa-regular:hover {
+            background-color: transparent;
+            opacity: 0;
+        }
+    
+        &.fa-solid {
+            color: $color_1_light;
+            margin-right: -24px;
+        }
+    }
+}
+
+footer {
+    padding: 20px;
+    background-color: #303030;
+
+    // override font for logo
+    span.strong:first-of-type{
+        @include span($size: 22.5px, $weight: 500, $font: 'Shrikhand', $typo: cursive);
+    }
+
+    ul {
+        // no bullet points kekw
+        list-style-type: none;
+        // remove bullet points default padding
+        padding-left: 0;
+        // vertical spacing
+        li {
+            margin: 10px 0;
+            // align icons and text
+            > i:first-of-type {
+                width: 20px;
+            }
+        }
+    }    
+
+    // override color and size for all subelements
+    * {
+        font-size: 15.5px !important;
+        color: white !important;
+    }
+}

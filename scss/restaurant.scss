@@ -1,0 +1,175 @@
+// import scss files
+@import "general";
+
+// === RESTAURANT PAGE STYLES ===
+
+// ----------- HEADER -----------
+
+.header--restaurant {
+    // override direction
+    flex-direction: row;
+    
+    @media (min-width: 992px) {
+        // override flex poperty
+        justify-content: space-between;
+    }
+
+    // navigate
+    div {
+        // rounded box
+        @include box($width: 50px, $height: 34.69px, $padding: initial);
+        margin-top: 10px;
+        // content layout management
+        @include flex;
+        // 'back'
+        i {
+            font-size: x-large;
+        }
+    }
+}
+
+// ----------- TITLES -----------
+
+// background image
+main img:first-of-type {
+    width: 100%;
+    height: 225px;
+    object-fit: cover;
+}
+
+.box__title {
+    width: 100%;
+    // content layout management
+    @include flex($direction: row, $align: baseline, $justify: space-between);
+
+    h1 {
+        // override font
+        @include span($size: 27.5px, $weight: 500, $font: 'Shrikhand', $typo: cursive);
+    }    
+
+    div.thumbnail--restaurant__like {      
+        // override color
+        background-color: $color_bg;
+        // pointer
+        cursor: pointer;
+
+        i.fa-regular {   
+            // override color
+            background-color: $color_bg;
+        }
+    }
+}
+
+// ----------- 'MENU' -----------
+
+.box--menu {
+    // box mixin overrides
+    padding: 20px 20px;
+    background-color: $color_bg;
+    border-radius: 40px 40px 0 0;
+    // overlay effect
+    margin-top: -40px;
+    position: relative;
+
+    // vertical spacing
+    > *:not(section:last-of-type) {
+        margin-bottom: 20px;
+    }
+
+    // starters etc ...
+    .menu-course {
+        width: 100%;
+
+        // green delimiter
+        .green {
+            // square box
+            @include box($height: 2px, $width: 50px, $padding: initial, $backcolor: $color_3, $radius: initial);
+            margin-bottom: 10px;
+        }
+
+        // dishes
+        .thumbnail--menu-course__dish {
+            // thumbnail class overrides
+            height: 50px;
+            border-radius: $radius_medium;
+            // check animation
+            overflow: hidden;
+
+            // wrapper
+            > div:first-of-type {
+                // hide check div at startup
+                width: calc(100% + 50px);
+
+                // manage transition
+                transition-property: width;
+                transition-duration: 0.5s;
+                transition-delay: 0s;
+                
+                // content layout management
+                @include flex($direction: row, $align: flex-end, $justify: space-between);
+    
+                * {
+                    // remove margins
+                    margin: 0px;
+                }
+    
+                > div:nth-of-type(1) {
+                    // content layout management
+                    @include flex($direction: column, $align: flex-start, $justify: space-between);
+                    // reset margins
+                    margin: 10px;
+                    
+                    overflow: auto;
+
+                    > h3, > span {
+                        width: 100%;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                    }
+                }
+    
+                > div:nth-of-type(2) {
+                    height: 100%;
+
+                    // content layout management
+                    @include flex($direction: row, $align: flex-end);
+    
+                    span {
+                        // reset margins
+                        margin: 10px;
+                    }
+    
+                    div.check {
+                        // rounded box
+                        @include box($height: 100%, $width: 50px, $padding: initial, $backcolor: $color_3, $radius: 0 $radius_medium $radius_medium 0);
+                        // content layout management
+                        @include flex($direction: column, $align: center, $justify: center);
+                        color: white;
+                    }
+                }
+
+                // hovering
+                &:hover {
+                    width: 100%;
+                    
+                    div.check > i {
+                        // check icon animation
+                        @include roll;
+                    }
+                }
+            
+            }
+        }
+
+        // use a loop for dishes animations
+        @each $position, $time in $dish_animation {
+            // use variable substitution to evaluate position in the selector
+            *:nth-child(#{$position}) {
+                opacity: 0;
+                @include show($delay: $time);
+            }
+        }
+    }
+
+}

@@ -1,0 +1,37 @@
+// ================ SCSS VARIABLES ==================
+
+// default box-sizing
+$box_sizing: border-box;
+
+// site colors
+$color_1: #9356dc;
+$color_2: #ff79da;
+$color_3: #99e2d0;
+
+// button hover color
+$color_1_light: #a771e9;
+$color_2_light: #ffa1e4;
+$color_1_xlight: #f3ebff;
+
+// background gray
+$color_bg: #f5f5f5;
+
+// border radiuses
+$radius_xlarge: 20px;
+$radius_large: 15px;
+$radius_medium: 10px;
+$radius_small: 2.5px;
+
+// paddings
+$padding_large: 40px 20px;
+
+// spinner
+$spinnerh: 50px;
+
+// dishes thumbnails animation
+$dish_animation: (
+    3: 0s,
+    4: 0.125s,
+    5: 0.25s,
+    6: 0.375s
+);

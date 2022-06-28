@@ -1,0 +1,141 @@
+// ================ SCSS MIXINS ==================
+
+// rounded or square boxes
+@mixin box($width: initial, $height: initial, $padding: $padding_large, $backcolor: white, $radius: $radius_xlarge) {
+    width: $width;
+    height: $height;
+    padding: $padding;
+    background-color: $backcolor;
+    border-radius: $radius;
+}
+
+// centered even flex layout
+@mixin flex($direction: column, $align: center, $justify: space-around) {
+    display: flex;
+    flex-direction: $direction;
+    align-items: $align;
+    justify-content: $justify;
+}
+
+// spans and h's
+@mixin span($margin: 5px 0 5px 0, $size: 15.5px, $weight: 500, $color: black, $font: 'Roboto', $typo: sans-serif) {
+    margin: $margin;
+    font-size: $size;
+    font-weight: $weight;
+    color: $color;
+    font-family: $font, $typo;
+}
+
+// shadowed elements
+@mixin shadow($blur: 12.5px, $spread: 1.5px) {
+    // horizontal offset, vertical offset, blur radius, spread radius, color
+    box-shadow: 2.5px 5px $blur $spread rgb(0 0 0 / 20%);
+}
+
+// dishes thumbnails animation
+@mixin show($duration: 0.5s, $delay: 0s) {
+
+    @keyframes spawn {
+        from {
+            transform: translateY(10%);
+            opacity: 0;
+        }
+
+        to {
+            transform: translateY(0%);
+            opacity: 1;
+        }
+    }
+
+    // duration, easing function, delay, iteration count, direction, fill mode, play state, keyframe name
+    animation: $duration linear $delay 1 normal forwards running spawn;
+
+}
+
+// dishes check icon animation
+@mixin roll($duration: 0.5s, $delay: 0s) {
+
+    @keyframes roll {
+        from {
+            // keep default styles
+        }
+        
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    
+    // duration, easing function, delay, iteration count, direction, fill mode, play state, keyframe name
+    animation: $duration linear $delay 1 normal forwards running roll;
+    
+}
+
+// loading spinner fade
+@mixin fade($duration: 1.5s, $delay: 3s) {
+
+    @keyframes fade {
+        from {
+            // keep default styles
+        }
+
+        to {
+            opacity: 0;
+            z-index: -1;
+        }
+    }
+
+    // duration, easing function, delay, iteration count, direction, fill mode, play state, keyframe name
+    animation: $duration linear $delay 1 normal forwards running fade;
+
+}
+
+// loading spinner
+@mixin spin($duration: 2s, $delay: 0s) {
+
+    @keyframes spin {
+        from {
+            // keep default styles
+        }
+
+        25% {
+            transform: translate(calc(75vw - (2 * $spinnerh + 80px)), calc(30vh - (2 * $spinnerh + 80px))) scale(1.5) rotate(90deg);
+        }
+
+        50% {
+            background-color: $color_2;
+            transform: translate(calc(85vw - (2 * $spinnerh + 80px)), calc(95vh - (2 * $spinnerh + 80px))) scale(-2, 2) rotate(180deg);
+        }
+
+        75% {
+            transform: translate(calc(45vw - (2 * $spinnerh + 80px)), calc(60vh - (2 * $spinnerh + 80px))) scale(-1.5, 1.5) rotate(270deg);
+        }
+        
+        to {
+            background-color: $color_1;
+            transform: translate(0, 0) scale(1) rotate(360deg);
+        }
+        
+    }
+
+    // duration, easing function, delay, iteration count, direction, fill mode, play state, keyframe name
+    animation: $duration linear $delay infinite normal forwards running spin;
+
+}
+
+// loading spinner logo
+@mixin blink($duration: 0.75s, $delay: 0s) {
+
+    @keyframes blink {
+        from {
+            // keep default styles
+        }
+
+        to {
+            opacity: 0;
+        }
+    }
+
+    // duration, easing function, delay, iteration count, direction, fill mode, play state, keyframe name
+    animation: $duration cubic-bezier(0.55, 0, 1, 0.45) $delay infinite alternate forwards running blink;
+    
+}
